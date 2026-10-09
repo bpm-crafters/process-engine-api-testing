@@ -14,7 +14,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>dev.bpm-crafters.process-engine-api</groupId>
+      <groupId>dev.bpm-crafters.process-engine-api-testing</groupId>
       <artifactId>process-engine-api-testing-core</artifactId>
       <version>${project.version}</version>
     </dependency>
