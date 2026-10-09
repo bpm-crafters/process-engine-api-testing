@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="process-engine-api-testing-contract" exporter="Camunda Modeler" exporterVersion="5.46.1">
+  <bpmn:message id="startMessage" name="contract.start" />
+  <bpmn:process id="contract-alternate-starts" isExecutable="true" camunda:historyTimeToLive="1">
+    <bpmn:startEvent id="normalStart">
+      <bpmn:outgoing>normalToApproval</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:startEvent id="messageStart">
+      <bpmn:outgoing>messageToApproval</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="startMessage" />
+    </bpmn:startEvent>
+    <bpmn:userTask id="approval" name="Approval">
+      <bpmn:incoming>Flow_1k7fd2j</bpmn:incoming>
+      <bpmn:outgoing>Flow_1yafsez</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="normalToApproval" sourceRef="normalStart" targetRef="Gateway_16wefpl" />
+    <bpmn:sequenceFlow id="messageToApproval" sourceRef="messageStart" targetRef="Gateway_16wefpl" />
+    <bpmn:exclusiveGateway id="Gateway_16wefpl">
+      <bpmn:incoming>normalToApproval</bpmn:incoming>
+      <bpmn:incoming>messageToApproval</bpmn:incoming>
+      <bpmn:outgoing>Flow_1k7fd2j</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1k7fd2j" sourceRef="Gateway_16wefpl" targetRef="approval" />
+    <bpmn:endEvent id="Event_0ilblyg">
+      <bpmn:incoming>Flow_1yafsez</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1yafsez" sourceRef="approval" targetRef="Event_0ilblyg" />
+    <bpmn:textAnnotation id="startNote">
+      <bpmn:text>C7 supports message and activity-entry starts. Adapters may map entry starts to their engine's equivalent process-instantiation feature.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="startAssociation" sourceRef="startNote" targetRef="messageStart" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="AlternateStartsDiagram">
+    <bpmndi:BPMNPlane id="AlternateStartsPlane" bpmnElement="contract-alternate-starts">
+      <bpmndi:BPMNShape id="normalStart_di" bpmnElement="normalStart">
+        <dc:Bounds x="190" y="72" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="messageStart_di" bpmnElement="messageStart">
+        <dc:Bounds x="190" y="172" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="approval_di" bpmnElement="approval">
+        <dc:Bounds x="330" y="110" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_16wefpl_di" bpmnElement="Gateway_16wefpl" isMarkerVisible="true">
+        <dc:Bounds x="255" y="125" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ilblyg_di" bpmnElement="Event_0ilblyg">
+        <dc:Bounds x="462" y="132" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="startAssociation_di" bpmnElement="startAssociation">
+        <di:waypoint x="340" y="262" />
+        <di:waypoint x="208" y="208" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="note_di" bpmnElement="startNote">
+        <dc:Bounds x="280" y="262" width="260" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="normalToApproval_di" bpmnElement="normalToApproval">
+        <di:waypoint x="225" y="83" />
+        <di:waypoint x="280" y="83" />
+        <di:waypoint x="280" y="125" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="messageToApproval_di" bpmnElement="messageToApproval">
+        <di:waypoint x="226" y="193" />
+        <di:waypoint x="280" y="193" />
+        <di:waypoint x="280" y="175" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1k7fd2j_di" bpmnElement="Flow_1k7fd2j">
+        <di:waypoint x="305" y="150" />
+        <di:waypoint x="330" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1yafsez_di" bpmnElement="Flow_1yafsez">
+        <di:waypoint x="430" y="150" />
+        <di:waypoint x="462" y="150" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
