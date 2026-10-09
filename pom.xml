@@ -140,4 +140,77 @@
     </plugins>
   </build>
 
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <scm>
+    <connection>scm:git:git@github.com:bpm-crafters/process-engine-api.git</connection>
+    <url>scm:git:git@github.com:bpm-crafters/process-engine-api.git</url>
+    <developerConnection>scm:git:git@github.com:bpm-crafters/process-engine-api.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
+  <developers>
+    <developer>
+      <id>jangalinski</id>
+      <name>Jan Galinski</name>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <organization>Holisticon AG</organization>
+      <organizationUrl>https://holisticon.de</organizationUrl>
+    </developer>
+    <developer>
+      <id>zambrovski</id>
+      <name>Simon Zambrovski</name>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <organization>Holisticon AG</organization>
+      <organizationUrl>https://holisticon.de</organizationUrl>
+    </developer>
+    <developer>
+      <id>__</id>
+      <name>Stephan Pelikan</name>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <organization>Phactum Solutions</organization>
+      <organizationUrl>https://phactum.at</organizationUrl>
+    </developer>
+    <developer>
+      <id>__</id>
+      <name>Peter Queteschiener</name>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <organization>Phactum Solutions</organization>
+      <organizationUrl>https://phactum.at</organizationUrl>
+    </developer>
+    <developer>
+      <id>__</id>
+      <name>Dominik Horn</name>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <organization>Miragon</organization>
+      <organizationUrl>https://miragon.com</organizationUrl>
+    </developer>
+    <developer>
+      <id>__</id>
+      <name>Thomas Heinrichs</name>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <organization>Miragon</organization>
+      <organizationUrl>https://miragon.com</organizationUrl>
+    </developer>
+  </developers>
+
+
 </project>

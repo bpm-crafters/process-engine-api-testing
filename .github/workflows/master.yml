@@ -50,6 +50,16 @@ jobs:
           OSS_CENTRAL_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
+      - name: Upload a Build Artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: central-bundle
+          path: target/central-publishing/central-bundle.zip
+          if-no-files-found: warn
+          retention-days: 7
+
+
       - name: Upload coverage information
         uses: codecov/codecov-action@v7.1.1
         with:
