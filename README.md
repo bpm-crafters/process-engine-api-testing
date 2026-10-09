@@ -16,6 +16,46 @@ This library exists to keep those tests outside an engine migration. When you re
 implement or update its adapter and run the existing tests against it. The tests then guard the
 migration against regressions instead of becoming part of the migration work.
 
+## JGiven
+
+Use `ProcessScenarioTest` with an adapter-provided initializer. The generic stages provide the
+engine-agnostic process operations; applications can extend them with domain-specific vocabulary.
+
+```kotlin
+import dev.bpmcrafters.processengineapi.testing.config.UseProcessTestInitializer
+import dev.bpmcrafters.processengineapi.testing.jgiven.ActionStage
+import dev.bpmcrafters.processengineapi.testing.jgiven.AssertStage
+import dev.bpmcrafters.processengineapi.testing.jgiven.ProcessScenarioTest
+import dev.bpmcrafters.processengineapi.testing.jgiven.given
+import dev.bpmcrafters.processengineapi.testing.jgiven.then
+import dev.bpmcrafters.processengineapi.testing.jgiven.whenever
+import org.junit.jupiter.api.Test
+
+@UseProcessTestInitializer(MyAdapterProcessTestInitializer.QUALIFIER)
+class OrderApprovalProcessTest : ProcessScenarioTest<OrderActions, OrderAssertions>() {
+
+  @Test
+  fun `approved order completes`() {
+    given {
+      processIsDeployed("bpmn/order-approval.bpmn")
+      processIsStartedByDefinition("order-approval", payload = mapOf("orderId" to "order-42"))
+    }
+
+    whenever {
+      userTaskIsCompleted("approve-order", payload = mapOf("approved" to true))
+    }
+
+    then {
+      processHasPassedInOrder("start", "approve-order", "end")
+      processIsFinished()
+    }
+  }
+}
+
+open class OrderActions : ActionStage<OrderActions>()
+open class OrderAssertions : AssertStage<OrderAssertions>()
+```
+
 
 ## Adapter compatibility contract
 
