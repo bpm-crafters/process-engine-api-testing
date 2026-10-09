@@ -9,7 +9,7 @@
     <relativePath/>
   </parent>
 
-  <groupId>dev.bpm-crafters.process-engine-api</groupId>
+  <groupId>dev.bpm-crafters.process-engine-api-testing</groupId>
   <artifactId>process-engine-api-testing-root</artifactId>
   <version>1.6-SNAPSHOT</version>
   <packaging>pom</packaging>
