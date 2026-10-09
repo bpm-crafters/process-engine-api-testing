@@ -19,7 +19,7 @@
   <url>https://github.com/bpm-crafters/process-engine-api-testing/</url>
 
   <properties>
-    <process-engine-api.version>1.6-SNAPSHOT</process-engine-api.version>
+    <process-engine-api.version>1.7</process-engine-api.version>
     <slf4j.version>2.0.17</slf4j.version>
     <assertj.version>3.27.7</assertj.version>
     <junit5.version>5.13.3</junit5.version>
