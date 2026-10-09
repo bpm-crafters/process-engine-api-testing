@@ -20,7 +20,7 @@
 
   <properties>
     <process-engine-api.version>1.6-SNAPSHOT</process-engine-api.version>
-    <slf4j.version>2.0.17</slf4j.version>
+    <slf4j.version>2.0.20</slf4j.version>
     <assertj.version>3.27.7</assertj.version>
     <junit5.version>5.13.3</junit5.version>
     <jgiven.version>2.0.3</jgiven.version>
