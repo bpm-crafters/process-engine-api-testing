@@ -16,7 +16,9 @@
   - base `AssertStage`
   - base `ActionStage`
   - test bootstrap integration
-- `docs`: authoritative project documentation.
+- `docs`: public documentation imported by the Process Engine API documentation site.
+  - customer-facing guides and reference material only
+- `design`: internal project design documentation; not published with the public documentation site.
   - `constitution.md`: non-negotiable design principles and boundaries
   - `spec.md`: detailed system design and functional specification
   - `implementation-plan.md`: phased delivery plan
@@ -34,7 +36,7 @@
 
 ## 4. Conventions
 
-- Treat `docs/spec.md` as the primary detailed description of intended behavior.
+- Treat `design/spec.md` as the primary detailed description of intended behavior.
 - Use ADRs only for decisions that are expensive to reverse or that define stable architecture boundaries.
 - Keep naming consistent with `process-engine-api` vocabulary wherever possible.
 - Prefer existing `process-engine-api` model types such as `TaskInformation` and `ProcessInformation` over introducing parallel abstractions.
@@ -42,8 +44,8 @@
 
 ## 5. Working Agreements
 
-- Do not treat exploratory code as authoritative over the docs. When design and code diverge, align code to the docs or update the docs deliberately.
+- Do not treat exploratory code as authoritative over the design documentation. When design and code diverge, align code to the design documentation or update the design deliberately.
 - Preserve the engine-agnostic dependency boundary. Public contracts here must not depend on Camunda 7 or Camunda 8 classes.
 - Keep customer-facing testing concerns separate from adapter-internal testing concerns.
-- When changing the architecture, update `constitution.md`, `spec.md`, and any affected ADR in the same change.
+- When changing the architecture, update `design/constitution.md`, `design/spec.md`, and any affected ADR in the same change.
 - Record follow-on cross-repo work explicitly when changes here require adapter-side implementation.
