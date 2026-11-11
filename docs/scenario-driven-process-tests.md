@@ -63,5 +63,5 @@ was completed, they report that an order was approved or that payment was reques
 BDD report is then understandable to business people: they can see their business being tested,
 not the technical noise of the current implementation.
 
-The [stages and domain abstractions](testing-stages.md) page explains how to build these reusable
-stages. The [testing API](testing-api.md) contains the available process operations.
+The [Process Testing API|Stages](testing-api.md) page explains how to build reusable stages and
+contains the available process operations.

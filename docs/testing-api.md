@@ -1,8 +1,8 @@
 ---
-title: Process testing API
+title: "Process Testing API|Stages"
 ---
 
-# Process testing API
+# Process Testing API|Stages
 
 `process-engine-api-testing` provides an adapter-neutral API for testing BPMN processes. Your
 test describes the process behaviour; the selected adapter testing library supplies the engine
@@ -149,6 +149,36 @@ Create non-final subclasses of `ActionStage` and `AssertStage` for business voca
 creates reporting subclasses at runtime, so Kotlin stages must be `open`. Generic methods remain
 available in those stages, while domain methods can translate business language into the same
 adapter-neutral operations.
+
+### Stages and domain abstractions
+
+Stages turn generic testing operations into business language. `ActionStage` owns events such as
+starts, completions, messages, and signals. `AssertStage` owns paths, completion, incidents,
+payload, and metadata assertions. `ProcessStage` supplies shared state, selection, and waits.
+
+=== "Kotlin"
+
+    ```kotlin
+    open class LoanActions : ActionStage<LoanActions>() {
+      fun anApplicationIsSubmitted(amount: Int) = step {
+        processIsStartedByDefinition("loan", mapOf("amount" to amount))
+      }
+    }
+    ```
+
+=== "Java"
+
+    ```java
+    class LoanActions extends ActionStage<LoanActions> {
+      LoanActions anApplicationIsSubmitted(int amount) {
+        return processIsStartedByDefinition("loan", Map.of("amount", amount));
+      }
+    }
+    ```
+
+Keep changes caused by a BPMN refactoring inside these composed steps. Advanced stages can access
+the protected grouped context APIs, but use generic stage operations where possible to retain
+adapter-neutral semantics.
 
 For advanced cases, stages provide protected access to the grouped `ProcessTestContext`: runtime
 Process Engine API clients, snapshot queries, assertions, payload access, capabilities, and
