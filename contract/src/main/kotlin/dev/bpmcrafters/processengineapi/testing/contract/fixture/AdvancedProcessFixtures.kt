@@ -117,6 +117,16 @@ interface ExternalTaskProcessFixture : ProcessModelFixture {
    * @return end-event identifier
    */
   fun endElementId(): String
+
+  /**
+   * @return BPMN error code handled by the external task's boundary event
+   */
+  fun bpmnErrorCode(): String
+
+  /**
+   * @return end-event identifier reached when the BPMN error is handled
+   */
+  fun bpmnErrorEndElementId(): String
 }
 
 /**

@@ -14,6 +14,7 @@ import dev.bpmcrafters.processengineapi.process.StartProcessByDefinitionCmd
 import dev.bpmcrafters.processengineapi.process.StartProcessByMessageCmd
 import dev.bpmcrafters.processengineapi.task.ChangeAssignmentModifyTaskCmd.AssignTaskCmd
 import dev.bpmcrafters.processengineapi.task.ChangePayloadModifyTaskCmd.UpdatePayloadTaskCmd
+import dev.bpmcrafters.processengineapi.task.CompleteTaskByErrorCmd
 import dev.bpmcrafters.processengineapi.task.CompleteTaskCmd
 import dev.bpmcrafters.processengineapi.task.FailTaskCmd
 import dev.bpmcrafters.processengineapi.task.TaskInformation
@@ -244,6 +245,50 @@ abstract class ActionStage<SUBTYPE : ActionStage<SUBTYPE>> : ProcessStage<SUBTYP
   ): SUBTYPE = step {
     externalTaskIsSelected(taskDescriptionKey, restrictions, predicate)
     externalTaskIsCompleted(payload)
+  }
+
+  /**
+   * Completes the currently selected external task with a BPMN error.
+   * @param errorCode BPMN error code to throw.
+   * @param payload task payload supplied with the error.
+   * @param errorMessage optional error details.
+   * @return this concrete action stage for Java/JGiven chaining.
+   */
+  @JvmOverloads
+  @Description("selected external task is completed with BPMN error \$errorCode")
+  open fun externalTaskIsCompletedWithError(
+    @Quoted errorCode: String,
+    @Hidden payload: Map<String, Any?> = emptyMap(),
+    @Quoted errorMessage: String? = null,
+  ): SUBTYPE = step {
+    runtimeApis().serviceTaskCompletionApi().completeTaskByError(
+      CompleteTaskByErrorCmd(requireCurrentTask().taskId, errorCode, errorMessage, payload)
+    ).get()
+    refreshProcessInformation()
+  }
+
+  /**
+   * Selects and completes one matching external task with a BPMN error.
+   * @param taskDescriptionKey external-task description key.
+   * @param errorCode BPMN error code to throw.
+   * @param payload task payload supplied with the error.
+   * @param errorMessage optional error details.
+   * @param restrictions task-selection restrictions.
+   * @param predicate optional post-restriction task filter.
+   * @return this concrete action stage for Java/JGiven chaining.
+   */
+  @JvmOverloads
+  @Description("external task \$taskDescriptionKey is completed with BPMN error \$errorCode")
+  open fun externalTaskIsCompletedWithError(
+    @Quoted taskDescriptionKey: String,
+    @Quoted errorCode: String,
+    @Hidden payload: Map<String, Any?> = emptyMap(),
+    @Quoted errorMessage: String? = null,
+    @Hidden restrictions: Map<String, String> = builder().build(),
+    @Hidden predicate: Predicate<TaskInformation>? = null,
+  ): SUBTYPE = step {
+    externalTaskIsSelected(taskDescriptionKey, restrictions, predicate)
+    externalTaskIsCompletedWithError(errorCode, payload, errorMessage)
   }
 
   /**

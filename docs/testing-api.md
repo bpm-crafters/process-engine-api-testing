@@ -116,6 +116,8 @@ Once a task is selected, use one of these action methods:
 | `selectedUserTaskIsAssignedTo(assignee)` | Change the selected user task's assignee. |
 | `externalTaskIsCompleted(payload)` | Complete the selected external task. |
 | `externalTaskIsCompleted(taskDescriptionKey, payload, restrictions, predicate)` | Select and complete an external task in one step. |
+| `externalTaskIsCompletedWithError(errorCode, payload, errorMessage)` | Complete the selected external task by throwing a BPMN error. |
+| `externalTaskIsCompletedWithError(taskDescriptionKey, errorCode, payload, errorMessage, restrictions, predicate)` | Select and complete an external task by throwing a BPMN error in one step. |
 | `externalTaskHasFailed(reason, retries)` | Fail the selected external task with the remaining retry count. |
 
 ### Payload methods
