@@ -9,10 +9,10 @@ This document is the delivery sequence for the architecture defined in `constitu
 Establish the design documents as the authoritative source of truth:
 
 - `AGENTS.md`
-- `docs/constitution.md`
-- `docs/spec.md`
-- `docs/adr/*.md`
-- `docs/implementation-plan.md`
+- `design/constitution.md`
+- `design/spec.md`
+- `design/adr/*.md`
+- `design/implementation-plan.md`
 
 ### Exit criteria
 

@@ -41,4 +41,28 @@ abstract class ExternalTaskCompatibilitySuite :
       processIsFinished()
     }
   }
+
+  /**
+   * Verifies that completing an external task with a BPMN error follows the model's error path.
+   */
+  @Test
+  fun `adapter completes an external task with a BPMN error`() {
+    val fixture = externalTaskProcessFixture()
+    given {
+      processIsDeployed(fixture.classpathResource())
+      processIsStartedByDefinition(fixture.definitionKey(), restrictions = fixture.definitionRestrictions())
+    }
+
+    whenever {
+      externalTaskIsCompletedWithError(
+        fixture.externalTaskDescriptionKey(),
+        fixture.bpmnErrorCode(),
+      )
+    }
+
+    then {
+      processHasPassed(fixture.bpmnErrorEndElementId())
+      processIsFinished()
+    }
+  }
 }
